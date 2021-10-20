@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-image: url("../cool-background.png");
+}
+.full-body {
+  width: 100vw;
+  height: 100vh;
+}
+.navBar {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  position: absolute;
+  width: 100vw;
+}
+.navBar ul {
+  list-style-type: none;
+  text-decoration: none;
+}
+.navBar > ul > a:visited {
+  color: black;
+}
+.navBar > ul > a:active {
+  color: grey;
+}
+.navBar > ul > a {
+  color: black;
+}
+.navBar > ul > li {
+  color: black;
+  display: inline;
+  transition: transform 0.2s;
+}
+.navBar > ul > li:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.right-float {
+  float: right;
+  margin: 2vw 3vw 1vw 1vw;
+}
+.left-float {
+  float: left;
+  margin: 2vw 1vw 1vw 3vw;
+}
