@@ -6,7 +6,10 @@ export const TaskCard = (props) => {
       <p className="taskTitle">{props.title}</p>
       <p className="taskDescription">{props.description}</p>
       <p className="taskDue">{props.due}</p>
-      <button className="btn" onClick={() => props.onDelete(props.id)}>
+      <button className="btn-edit" onClick={() => props.onEdit(props.id)}>
+        EDIT
+      </button>
+      <button className="btn-delete" onClick={() => props.onDelete(props.id)}>
         DELETE
       </button>
     </div>
