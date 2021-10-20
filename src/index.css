@@ -32,15 +32,13 @@ body {
 }
 .navBar > ul > a {
   color: black;
+  transition: font-size 0.2s;
+}
+.navBar > ul > a:hover {
+  font-size: 110%;
 }
 .navBar > ul > li {
-  color: black;
   display: inline;
-  transition: transform 0.2s;
-}
-.navBar > ul > li:hover {
-  transform: scale(1.1);
-  cursor: pointer;
 }
 .right-float {
   float: right;
