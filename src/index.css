@@ -102,3 +102,12 @@ body {
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
 }
+.btn {
+  background-color: red;
+  opacity: 0.7;
+  position: absolute;
+  bottom: 15%;
+  right: 5%;
+  width: 20%;
+  height: 10%;
+}

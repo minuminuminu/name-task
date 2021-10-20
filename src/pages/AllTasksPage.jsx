@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { TaskCard } from "../components/TaskCard";
 
 export const AllTasksPage = () => {
@@ -40,9 +40,15 @@ export const AllTasksPage = () => {
     // },
   ];
 
+  const [tasks, setTasks] = useState(allTasks);
+
+  const onDelete = (itemId) => {
+    setTasks(tasks.filter(({ id }) => id !== itemId));
+  };
+
   return (
     <div className="allTasksPage">
-      {allTasks.map((e) => {
+      {tasks.map((e) => {
         return (
           <TaskCard
             name={e.name}
@@ -51,6 +57,8 @@ export const AllTasksPage = () => {
             description={e.description}
             due={e.due}
             key={e.id}
+            id={e.id}
+            onDelete={onDelete}
           />
         );
       })}
