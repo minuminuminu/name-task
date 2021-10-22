@@ -29,8 +29,8 @@ export const AllTasksPage = () => {
     return meetups;
   };
 
-  const onDelete = async (itemId) => {
-    await fetch(`http://localhost:5000/tasks/${itemId}`, {
+  const onDelete = async (id) => {
+    await fetch(`http://localhost:5000/tasks/${id}`, {
       method: "DELETE",
     });
 
@@ -47,8 +47,8 @@ export const AllTasksPage = () => {
             title={e.title}
             description={e.description}
             due={e.due}
-            key={e.title}
-            // id={e.id}
+            key={e.id}
+            id={e.id}
             onDelete={onDelete}
           />
         );

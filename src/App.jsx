@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="full-body">
       <BrowserRouter>
-        {/* <NavBar /> */}
+        <NavBar />
         <Switch>
           <Route path="/" exact>
             <HomePage />
