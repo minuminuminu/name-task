@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { TaskCard } from "../components/TaskCard";
+import { EditForm } from "../components/EditForm";
 
 export const AllTasksPage = () => {
   const [tasks, setTasks] = useState([]);
+  const [showEdit, setShowEdit] = useState(false);
 
   useEffect(() => {
     const getTasks = async () => {
@@ -37,22 +39,44 @@ export const AllTasksPage = () => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+  const onEdit = () => {};
+
+  // const applyEdit = async (id) => {
+  //   await fetch (`http://localhost:5000/tasks/${id}`,{
+  //     method:"PUT",
+  //     body: JSON.stringify({
+
+  //     })
+  //   })
+  // }
+
+  const onEditClick = () => {
+    setShowEdit(!showEdit);
+  };
+
   return (
-    <div className="allTasksPage">
-      {tasks.map((e) => {
-        return (
-          <TaskCard
-            name={e.name}
-            // img={e.profile_pic}
-            title={e.title}
-            description={e.description}
-            due={e.due}
-            key={e.id}
-            id={e.id}
-            onDelete={onDelete}
-          />
-        );
-      })}
+    <div className="allTasksContainer">
+      {showEdit ? (
+        <EditForm />
+      ) : (
+        <div className="allTasksPage">
+          {tasks.map((e) => {
+            return (
+              <TaskCard
+                name={e.name}
+                // img={e.profile_pic}
+                title={e.title}
+                description={e.description}
+                due={e.due}
+                key={e.id}
+                id={e.id}
+                onDelete={onDelete}
+                showEdit={onEditClick}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

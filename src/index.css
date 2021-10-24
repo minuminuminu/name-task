@@ -169,3 +169,18 @@ textarea {
   padding: 5px;
   width: 10vw;
 }
+.edit-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.editInterface {
+  width: 55vw;
+  height: 60vh;
+  background-color: red;
+}
