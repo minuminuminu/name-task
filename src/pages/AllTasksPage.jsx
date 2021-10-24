@@ -39,17 +39,6 @@ export const AllTasksPage = () => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  const onEdit = () => {};
-
-  // const applyEdit = async (id) => {
-  //   await fetch (`http://localhost:5000/tasks/${id}`,{
-  //     method:"PUT",
-  //     body: JSON.stringify({
-
-  //     })
-  //   })
-  // }
-
   const onEditClick = () => {
     setShowEdit(!showEdit);
   };
