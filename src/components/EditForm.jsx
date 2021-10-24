@@ -1,19 +1,18 @@
 import { useForm } from "react-hook-form";
 
-export const EditForm = () => {
+export const EditForm = (props) => {
   const { register, handleSubmit } = useForm();
   const editData = (data) => {
-    //ADD EDIT FETCH
     data.preventDefault;
 
-    fetch("http://localhost:5000/tasks/", {
-      method: "POST",
+    fetch(`http://localhost:5000/tasks/${props.currentId}`, {
+      method: "PUT",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    alert("Successfully added task!");
+    alert("Successfully edited task!");
   };
 
   return (
@@ -24,7 +23,13 @@ export const EditForm = () => {
           autoComplete="off"
           className="edit-form"
         >
-          <input {...register("name")} id="name" placeholder="Name" required />
+          <input
+            {...register("name")}
+            id="name"
+            placeholder="Name"
+            required
+            value="TEST"
+          />
           <br />
           <input
             {...register("title")}

@@ -4,6 +4,7 @@ import { ErrorPage } from "./pages/ErrorPage";
 import { AllTasksPage } from "./pages/AllTasksPage";
 import { AddTaskPage } from "./pages/AddTaskPage";
 import { HomePage } from "./pages/HomePage";
+import { EditTaskPage } from "./pages/EditTaskPage";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route path="/all-tasks">
             <AllTasksPage />
+          </Route>
+          <Route path="/edit-task/:id">
+            <EditTaskPage />
           </Route>
           <Route path="*">
             <ErrorPage />

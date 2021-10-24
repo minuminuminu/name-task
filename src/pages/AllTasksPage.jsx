@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import { TaskCard } from "../components/TaskCard";
-import { EditForm } from "../components/EditForm";
 
 export const AllTasksPage = () => {
   const [tasks, setTasks] = useState([]);
-  const [showEdit, setShowEdit] = useState(false);
+  const router = useHistory();
 
   useEffect(() => {
     const getTasks = async () => {
@@ -39,33 +39,29 @@ export const AllTasksPage = () => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  const onEditClick = () => {
-    setShowEdit(!showEdit);
+  const onEditClick = (id) => {
+    router.push(`/edit-task/${id}`);
   };
 
   return (
     <div className="allTasksContainer">
-      {showEdit ? (
-        <EditForm />
-      ) : (
-        <div className="allTasksPage">
-          {tasks.map((e) => {
-            return (
-              <TaskCard
-                name={e.name}
-                // img={e.profile_pic}
-                title={e.title}
-                description={e.description}
-                due={e.due}
-                key={e.id}
-                id={e.id}
-                onDelete={onDelete}
-                showEdit={onEditClick}
-              />
-            );
-          })}
-        </div>
-      )}
+      <div className="allTasksPage">
+        {tasks.map((e) => {
+          return (
+            <TaskCard
+              name={e.name}
+              // img={e.profile_pic}
+              title={e.title}
+              description={e.description}
+              due={e.due}
+              key={e.id}
+              id={e.id}
+              onDelete={onDelete}
+              showEdit={() => onEditClick(e.id)}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
