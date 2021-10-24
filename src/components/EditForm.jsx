@@ -1,11 +1,14 @@
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router";
 
-export const EditForm = (props) => {
+export const EditForm = () => {
   const { register, handleSubmit } = useForm();
+  const { id } = useParams();
+
   const editData = (data) => {
     data.preventDefault;
 
-    fetch(`http://localhost:5000/tasks/${props.currentId}`, {
+    fetch(`http://localhost:5000/tasks/${id}`, {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
