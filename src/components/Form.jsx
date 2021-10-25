@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 
 export const Form = () => {
   const { register, handleSubmit } = useForm();
+  const history = useHistory();
   const submitData = (data) => {
     data.preventDefault;
 
@@ -13,6 +15,7 @@ export const Form = () => {
       },
     });
     alert("Successfully added task!");
+    history.push("/all-tasks");
   };
 
   return (
