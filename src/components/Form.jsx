@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export const Form = () => {
   const { register, handleSubmit } = useForm();
+  const [profiles, setProfiles] = useState([]);
   const history = useHistory();
   const submitData = (data) => {
     data.preventDefault;
@@ -17,12 +19,35 @@ export const Form = () => {
     alert("Successfully added task!");
     history.push("/all-tasks");
   };
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      const rawData = await fetch("http://localhost:5000/profiles");
+      const jsonData = await rawData.json();
+      setProfiles(jsonData);
+    };
+
+    fetchProfiles();
+  }, []);
 
   return (
     <div className="container-body">
       <div className="container">
         <form onSubmit={handleSubmit(submitData)} autoComplete="off">
-          <input {...register("name")} id="name" placeholder="Name" required />
+          <select {...register("name")} className="selectField">
+            {profiles.map((e) => {
+              return (
+                <option value={e.name} profile_src={e.profile_pic} key={e.id}>
+                  {e.name}
+                </option>
+              );
+            })}
+            <option
+              value="dummy_value"
+              onClick={() => history.push("/new-profile")}
+            >
+              Create new profile...
+            </option>
+          </select>
           <br />
           <input
             {...register("title")}

@@ -200,3 +200,32 @@ textarea {
   border-radius: 15px;
   box-shadow: 0 0 10px grey;
 }
+.selectField {
+  text-align: center;
+  width: 15vw;
+  border-radius: 15px;
+  padding: 2px;
+  margin: 1vh;
+  box-shadow: 0 0 10px grey;
+  opacity: 0.7;
+  transition: box-shadow 0.2s ease-in-out;
+}
+.selectField:hover {
+  box-shadow: 0 0 20px grey;
+}
+.profile-interface {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-container {
+  text-align: center;
+}
+#profile-name {
+  width: 25vw;
+}
+#profile-pic {
+  width: 40vw;
+}
