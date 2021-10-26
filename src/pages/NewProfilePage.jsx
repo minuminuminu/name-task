@@ -5,9 +5,7 @@ export const NewProfilePage = () => {
   const history = useHistory();
   const { register, handleSubmit } = useForm();
   const submitData = (data) => {
-    data.preventDefault;
-
-    fetch("http://localhost:5000/profiles/", {
+    fetch("https://task-tracker-minu.herokuapp.com/profiles", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -33,7 +31,7 @@ export const NewProfilePage = () => {
         />
         <br />
         <input
-          {...register("profile_pic")}
+          {...register("imageLink")}
           id="profile-pic"
           placeholder="Profile Picture URL"
           required

@@ -7,11 +7,16 @@ export const Form = () => {
   const [profiles, setProfiles] = useState([]);
   const history = useHistory();
   const submitData = (data) => {
-    data.preventDefault;
+    const newData = JSON.stringify({
+      description: data.description,
+      due: data.due,
+      title: data.title,
+      profile: Number(data.name),
+    });
 
-    fetch("http://localhost:5000/tasks/", {
+    fetch("https://task-tracker-minu.herokuapp.com/tasks", {
       method: "POST",
-      body: JSON.stringify(data),
+      body: newData,
       headers: {
         "Content-Type": "application/json",
       },
@@ -19,11 +24,16 @@ export const Form = () => {
     alert("Successfully added task!");
     history.push("/all-tasks");
   };
+
   useEffect(() => {
     const fetchProfiles = async () => {
-      const rawData = await fetch("http://localhost:5000/profiles");
+      const rawData = await fetch(
+        "https://task-tracker-minu.herokuapp.com/profiles"
+      );
       const jsonData = await rawData.json();
       setProfiles(jsonData);
+
+      console.log("profiles", profiles);
     };
 
     fetchProfiles();
@@ -36,7 +46,7 @@ export const Form = () => {
           <select {...register("name")} className="selectField">
             {profiles.map((e) => {
               return (
-                <option value={e.name} profile_src={e.profile_pic} key={e.id}>
+                <option value={e.id} key={e.id}>
                   {e.name}
                 </option>
               );

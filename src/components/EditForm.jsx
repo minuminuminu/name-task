@@ -3,46 +3,51 @@ import { useParams, useHistory } from "react-router";
 import { useState, useEffect } from "react";
 
 export const EditForm = () => {
-  const { register, handleSubmit } = useForm();
   const { id } = useParams();
-  const [nameVal, setNameVal] = useState(null);
-  const [descriptionVal, setDescriptionVal] = useState(null);
-  const [titleVal, setTitleVal] = useState(null);
-  const [dueVal, setDueVal] = useState(null);
+  const { register, handleSubmit } = useForm();
+  const [initialTask, setInitialTask] = useState(null);
+  const [profiles, setProfiles] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
     const fetchInputValue = async () => {
-      const rawData = await fetch(`http://localhost:5000/tasks/${id}`);
+      const rawData = await fetch(
+        `https://task-tracker-minu.herokuapp.com/tasks/${id}`
+      );
       const jsonData = await rawData.json();
 
-      setNameVal(jsonData.name);
-      setTitleVal(jsonData.title);
-      setDescriptionVal(jsonData.description);
-      setDueVal(jsonData.due);
+      setInitialTask(jsonData);
     };
 
     fetchInputValue();
   }, []);
 
-  const editData = (data) => {
-    data.preventDefault;
-    if (data.name == "") {
-      data.name = nameVal;
-    }
-    if (data.description == "") {
-      data.description = descriptionVal;
-    }
-    if (data.due == "") {
-      data.due = dueVal;
-    }
-    if (data.title == "") {
-      data.title = titleVal;
-    }
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      const rawData = await fetch(
+        "https://task-tracker-minu.herokuapp.com/profiles"
+      );
+      const jsonData = await rawData.json();
+      setProfiles(jsonData);
 
-    fetch(`http://localhost:5000/tasks/${id}`, {
+      console.log("profiles", profiles);
+    };
+
+    fetchProfiles();
+  }, []);
+
+  const editData = (data) => {
+    const newData = JSON.stringify({
+      description:
+        data.description == "" ? initialTask.description : data.description,
+      due: data.due == "" ? initialTask.due : data.due,
+      title: data.title == "" ? initialTask.title : data.title,
+      profile: parseInt(data.name),
+    });
+
+    fetch(`https://task-tracker-minu.herokuapp.com/tasks/${id}`, {
       method: "PUT",
-      body: JSON.stringify(data),
+      body: newData,
       headers: {
         "Content-Type": "application/json",
       },
@@ -50,6 +55,10 @@ export const EditForm = () => {
     alert("Successfully edited task!");
     history.push("/all-tasks");
   };
+
+  if (initialTask == null || profiles.length == 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="edit-container">
@@ -59,20 +68,32 @@ export const EditForm = () => {
           autoComplete="off"
           className="edit-form"
         >
-          <input
+          <select
             {...register("name")}
-            id="name"
-            placeholder="Name"
-            required
-            defaultValue={nameVal}
-          />
+            className="selectField"
+            defaultValue={initialTask.profileId}
+          >
+            {profiles.map((e) => {
+              return (
+                <option value={e.id} key={e.id}>
+                  {e.name}
+                </option>
+              );
+            })}
+            <option
+              value="dummy_value"
+              onClick={() => history.push("/new-profile")}
+            >
+              Create new profile...
+            </option>
+          </select>
           <br />
           <input
             {...register("title")}
             id="title"
             placeholder="Task Title"
             required
-            defaultValue={titleVal}
+            defaultValue={initialTask.title}
           />
           <br />
           <textarea
@@ -80,7 +101,7 @@ export const EditForm = () => {
             id="description"
             placeholder="Task Description"
             required
-            defaultValue={descriptionVal}
+            defaultValue={initialTask.description}
           />
           <br />
           <input
@@ -88,7 +109,7 @@ export const EditForm = () => {
             id="due"
             placeholder="Due"
             required
-            defaultValue={dueVal}
+            defaultValue={initialTask.due}
           />
           <br />
           <button className="btn-edit-confirm">CONFIRM</button>
