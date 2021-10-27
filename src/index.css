@@ -14,6 +14,11 @@ body {
   width: 100vw;
   height: 100vh;
 }
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .navBar {
   font-weight: 300;
   position: absolute;
@@ -65,7 +70,6 @@ body {
   margin: auto;
   box-shadow: 0 0 20px #888888;
   transition: transform 0.2s;
-  /* background-color: red; */
 }
 .taskCard:hover {
   transform: scale(1.03);
@@ -168,6 +172,12 @@ textarea {
   transform: translateX(-50%);
   padding: 5px;
   width: 10vw;
+  background-color: rgb(8, 175, 8);
+  transition: background-color 0.2s;
+  box-shadow: 15px;
+}
+.btn:hover {
+  background-color: rgb(13, 131, 13);
 }
 .edit-form {
   position: relative;
@@ -229,20 +239,8 @@ textarea {
 #profile-pic {
   width: 40vw;
 }
-.edit-profile-container {
-  height: 90vh;
-  width: 100vw;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.edit-profile-form {
-  text-align: center;
-}
 .delete-p-btn {
-  width: 12vw;
+  width: 15vw;
   height: 4vh;
   background-color: red;
   box-shadow: 15px;
@@ -253,12 +251,22 @@ textarea {
   background-color: rgb(223, 50, 50);
 }
 .edit-p-btn {
-  width: 10vw;
+  width: 13vw;
   height: 4vh;
-  background-color: grey;
+  background-color: rgb(160, 155, 155);
   box-shadow: 15px;
   transition: background-color 0.2s;
 }
 .edit-p-btn:hover {
-  background-color: rgb(160, 155, 155);
+  background-color: grey;
+}
+.add-p-btn {
+  width: 9vw;
+  height: 4vh;
+  background-color: rgb(16, 160, 16);
+  box-shadow: 15px;
+  transition: background-color 0.2s;
+}
+.add-p-btn:hover {
+  background-color: rgb(14, 134, 14);
 }

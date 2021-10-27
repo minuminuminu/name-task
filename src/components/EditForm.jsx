@@ -55,7 +55,11 @@ export const EditForm = () => {
   };
 
   if (initialTask == null || profiles.length == 0) {
-    return <div>Loading...</div>;
+    return (
+      <div className="full-body center">
+        <img src="../../Spinner-1s-200px.svg" />
+      </div>
+    );
   }
 
   return (

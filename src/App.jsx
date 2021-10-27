@@ -6,7 +6,6 @@ import { AddTaskPage } from "./pages/AddTaskPage";
 import { HomePage } from "./pages/HomePage";
 import { EditTaskPage } from "./pages/EditTaskPage";
 import { ProfilePage } from "./pages/ProfilePage";
-import { EditProfilePage } from "./pages/EditProfilePage";
 
 function App() {
   return (
@@ -28,9 +27,6 @@ function App() {
           </Route>
           <Route path="/profile-overview">
             <ProfilePage />
-          </Route>
-          <Route path="/edit-profile">
-            <EditProfilePage />
           </Route>
           <Route path="*">
             <ErrorPage />

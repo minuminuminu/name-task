@@ -83,13 +83,15 @@ export const ProfilePage = () => {
           required
         />
         <br />
-        <button onClick={handleSubmit(submitData)}>Add profile</button>
+        <button onClick={handleSubmit(submitData)} className="add-p-btn">
+          Add profile
+        </button>
         <br />
-        <button onClick={handleSubmit(deleteProfile)}>
+        <button onClick={handleSubmit(deleteProfile)} className="delete-p-btn">
           Delete selected profile
         </button>
         <br />
-        <button onClick={handleSubmit(editProfile)}>
+        <button onClick={handleSubmit(editProfile)} className="edit-p-btn">
           Edit selected profile
         </button>
       </form>
