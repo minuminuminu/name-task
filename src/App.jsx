@@ -4,7 +4,6 @@ import { ErrorPage } from "./pages/ErrorPage";
 import { AllTasksPage } from "./pages/AllTasksPage";
 import { AddTaskPage } from "./pages/AddTaskPage";
 import { HomePage } from "./pages/HomePage";
-import { EditTaskPage } from "./pages/EditTaskPage";
 import { ProfilePage } from "./pages/ProfilePage";
 
 function App() {
@@ -23,7 +22,7 @@ function App() {
             <AllTasksPage />
           </Route>
           <Route path="/edit-task/:id">
-            <EditTaskPage />
+            <AddTaskPage />
           </Route>
           <Route path="/profile-overview">
             <ProfilePage />

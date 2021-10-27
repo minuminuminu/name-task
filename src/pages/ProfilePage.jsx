@@ -6,6 +6,7 @@ export const ProfilePage = () => {
   const history = useHistory();
   const { register, handleSubmit } = useForm();
   const [profiles, setProfiles] = useState([]);
+
   const submitData = (data) => {
     fetch("https://task-tracker-minu.herokuapp.com/profiles", {
       method: "POST",
