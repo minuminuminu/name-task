@@ -6,6 +6,7 @@ import { AddTaskPage } from "./pages/AddTaskPage";
 import { HomePage } from "./pages/HomePage";
 import { EditTaskPage } from "./pages/EditTaskPage";
 import { NewProfilePage } from "./pages/NewProfilePage";
+import { EditProfilePage } from "./pages/EditProfilePage";
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/new-profile">
             <NewProfilePage />
+          </Route>
+          <Route path="/edit-profile">
+            <EditProfilePage />
           </Route>
           <Route path="*">
             <ErrorPage />

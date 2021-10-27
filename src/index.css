@@ -229,3 +229,15 @@ textarea {
 #profile-pic {
   width: 40vw;
 }
+.edit-profile-container {
+  height: 90vh;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.edit-profile-form {
+  text-align: center;
+}

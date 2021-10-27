@@ -32,8 +32,6 @@ export const Form = () => {
       );
       const jsonData = await rawData.json();
       setProfiles(jsonData);
-
-      console.log("profiles", profiles);
     };
 
     fetchProfiles();
@@ -56,6 +54,12 @@ export const Form = () => {
               onClick={() => history.push("/new-profile")}
             >
               Create new profile...
+            </option>
+            <option
+              value="dummy_value"
+              onClick={() => history.push("/edit-profile")}
+            >
+              Edit existing profile...
             </option>
           </select>
           <br />

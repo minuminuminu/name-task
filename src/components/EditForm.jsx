@@ -29,8 +29,6 @@ export const EditForm = () => {
       );
       const jsonData = await rawData.json();
       setProfiles(jsonData);
-
-      console.log("profiles", profiles);
     };
 
     fetchProfiles();
