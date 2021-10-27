@@ -241,3 +241,24 @@ textarea {
 .edit-profile-form {
   text-align: center;
 }
+.delete-p-btn {
+  width: 12vw;
+  height: 4vh;
+  background-color: red;
+  box-shadow: 15px;
+  transition: background-color 0.2s;
+  margin: 1vh;
+}
+.delete-p-btn:hover {
+  background-color: rgb(223, 50, 50);
+}
+.edit-p-btn {
+  width: 10vw;
+  height: 4vh;
+  background-color: grey;
+  box-shadow: 15px;
+  transition: background-color 0.2s;
+}
+.edit-p-btn:hover {
+  background-color: rgb(160, 155, 155);
+}

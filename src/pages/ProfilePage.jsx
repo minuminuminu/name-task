@@ -1,11 +1,22 @@
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router";
 import { useState, useEffect } from "react";
 
-export const EditProfilePage = () => {
+export const ProfilePage = () => {
   const history = useHistory();
   const { register, handleSubmit } = useForm();
   const [profiles, setProfiles] = useState([]);
+  const submitData = (data) => {
+    fetch("https://task-tracker-minu.herokuapp.com/profiles", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    alert("Successfully added profile!");
+    history.push("/add-task");
+  };
 
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -19,7 +30,18 @@ export const EditProfilePage = () => {
     fetchProfiles();
   }, []);
 
-  const submitEdit = (data) => {
+  const deleteProfile = (data) => {
+    fetch(
+      `https://task-tracker-minu.herokuapp.com/profiles/${data.currentProfile}`,
+      {
+        method: "DELETE",
+      }
+    );
+    alert("Successfully deleted profile!");
+    history.push("/add-task");
+  };
+
+  const editProfile = (data) => {
     fetch(
       `https://task-tracker-minu.herokuapp.com/profiles/${data.currentProfile}`,
       {
@@ -34,24 +56,9 @@ export const EditProfilePage = () => {
     history.push("/add-task");
   };
 
-  const deleteProfile = (data) => {
-    fetch(
-      `https://task-tracker-minu.herokuapp.com/profiles/${data.currentProfile}`,
-      {
-        method: "DELETE",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    alert("Successfully deleted profile!");
-    history.push("/add-task");
-  };
-
   return (
-    <div className="edit-profile-container">
-      <form className="edit-profile-form">
+    <div className="profile-interface">
+      <form autoComplete="off" className="profile-container">
         <select {...register("currentProfile")}>
           {profiles.map((e) => {
             return (
@@ -62,17 +69,29 @@ export const EditProfilePage = () => {
           })}
         </select>
         <br />
-        <input {...register("name")} id="profile-name" placeholder="New Name" />
+        <input
+          {...register("name")}
+          id="profile-name"
+          placeholder="Full Name"
+          required
+        />
         <br />
         <input
           {...register("imageLink")}
           id="profile-pic"
-          placeholder="New Profile Picture URL"
+          placeholder="Profile Picture URL"
+          required
         />
         <br />
-        <button onClick={handleSubmit(submitEdit)}>EDIT PROFILE</button>
+        <button onClick={handleSubmit(submitData)}>Add profile</button>
         <br />
-        <button onClick={handleSubmit(deleteProfile)}>DELETE PROFILE</button>
+        <button onClick={handleSubmit(deleteProfile)}>
+          Delete selected profile
+        </button>
+        <br />
+        <button onClick={handleSubmit(editProfile)}>
+          Edit selected profile
+        </button>
       </form>
     </div>
   );

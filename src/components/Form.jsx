@@ -51,15 +51,9 @@ export const Form = () => {
             })}
             <option
               value="dummy_value"
-              onClick={() => history.push("/new-profile")}
+              onClick={() => history.push("/profile-overview")}
             >
-              Create new profile...
-            </option>
-            <option
-              value="dummy_value"
-              onClick={() => history.push("/edit-profile")}
-            >
-              Edit existing profile...
+              Profile overview...
             </option>
           </select>
           <br />

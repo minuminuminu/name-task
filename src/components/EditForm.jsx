@@ -80,9 +80,9 @@ export const EditForm = () => {
             })}
             <option
               value="dummy_value"
-              onClick={() => history.push("/new-profile")}
+              onClick={() => history.push("/profile-overview")}
             >
-              Create new profile...
+              Profile overview...
             </option>
           </select>
           <br />
