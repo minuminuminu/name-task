@@ -1,24 +1,36 @@
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { useParams, useLocation } from "react-router";
 import { useState, useEffect } from "react";
 
-export const Form = () => {
+export const Form = (props) => {
   const { register, handleSubmit } = useForm();
   const [profiles, setProfiles] = useState([]);
-  const { id } = useParams();
-  const [initialTask, setInitialTask] = useState(null);
-  let isEdit = false;
   const history = useHistory();
-  const location = useLocation();
 
-  if (location.pathname.includes("edit-task")) {
-    isEdit = true;
-  } else {
-    isEdit = false;
-  }
+  const onEdit = (data) => {
+    // TODO: change this
+    const newData = JSON.stringify({
+      description:
+        data.description == ""
+          ? props.initialTask.description
+          : data.description,
+      due: data.due == "" ? props.initialTask.due : data.due,
+      title: data.title == "" ? props.initialTask.title : data.title,
+      profile: parseInt(data.name),
+    });
 
-  const submitData = (data) => {
+    fetch(`https://task-tracker-minu.herokuapp.com/tasks/${props.id}`, {
+      method: "PUT",
+      body: newData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    alert("Successfully edited task!");
+    history.push("/all-tasks");
+  };
+
+  const onAdd = (data) => {
     const newData = JSON.stringify({
       description: data.description,
       due: data.due,
@@ -37,21 +49,6 @@ export const Form = () => {
     history.push("/all-tasks");
   };
 
-  if (isEdit) {
-    useEffect(() => {
-      const fetchInputValue = async () => {
-        const rawData = await fetch(
-          `https://task-tracker-minu.herokuapp.com/tasks/${id}`
-        );
-        const jsonData = await rawData.json();
-
-        setInitialTask(jsonData);
-      };
-
-      fetchInputValue();
-    }, []);
-  }
-
   useEffect(() => {
     const fetchProfiles = async () => {
       const rawData = await fetch(
@@ -63,36 +60,6 @@ export const Form = () => {
 
     fetchProfiles();
   }, []);
-
-  const submitEdit = (data) => {
-    const newData = JSON.stringify({
-      description:
-        data.description == "" ? initialTask.description : data.description,
-      due: data.due == "" ? initialTask.due : data.due,
-      title: data.title == "" ? initialTask.title : data.title,
-      profile: parseInt(data.name),
-    });
-
-    fetch(`https://task-tracker-minu.herokuapp.com/tasks/${id}`, {
-      method: "PUT",
-      body: newData,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    alert("Successfully edited task!");
-    history.push("/all-tasks");
-  };
-
-  if (isEdit) {
-    if (initialTask == null) {
-      return (
-        <div className="full-body center">
-          <img src="../../Spinner-1s-200px.svg" />
-        </div>
-      );
-    }
-  }
 
   if (profiles.length == 0) {
     return (
@@ -109,7 +76,7 @@ export const Form = () => {
           <select
             {...register("name")}
             className="selectField"
-            defaultValue={isEdit ? initialTask.profileId : null}
+            defaultValue={props.initialTask?.profileId}
           >
             {profiles.map((e) => {
               return (
@@ -131,7 +98,7 @@ export const Form = () => {
             id="title"
             placeholder="Task Title"
             required
-            defaultValue={isEdit ? initialTask.title : null}
+            defaultValue={props.initialTask?.title}
           />
           <br />
           <textarea
@@ -139,7 +106,7 @@ export const Form = () => {
             id="description"
             placeholder="Task Description"
             required
-            defaultValue={isEdit ? initialTask.description : null}
+            defaultValue={props.initialTask?.description}
           />
           <br />
           <input
@@ -147,18 +114,15 @@ export const Form = () => {
             id="due"
             placeholder="Due"
             required
-            defaultValue={isEdit ? initialTask.due : null}
+            defaultValue={props.initialTask?.due}
           />
           <br />
-          {isEdit ? (
-            <button
-              className="btn-edit-confirm"
-              onClick={handleSubmit(submitEdit)}
-            >
+          {props.id ? (
+            <button className="btn-edit-confirm" onClick={handleSubmit(onEdit)}>
               CONFIRM CHANGES
             </button>
           ) : (
-            <button className="btn" onClick={handleSubmit(submitData)}>
+            <button className="btn" onClick={handleSubmit(onAdd)}>
               ADD TASK
             </button>
           )}
