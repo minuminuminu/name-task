@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Loading } from "./Loading";
 
 export const Form = (props) => {
   const { register, handleSubmit } = useForm();
@@ -62,11 +63,7 @@ export const Form = (props) => {
   }, []);
 
   if (profiles.length == 0) {
-    return (
-      <div className="full-body center">
-        <img src="../../Spinner-1s-200px.svg" />
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
