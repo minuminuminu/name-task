@@ -52,7 +52,7 @@ export const AllTasksPage = () => {
           return (
             <TaskCard
               name={e.profile.name}
-              // img={e.profile_pic}
+              img={e.profile.imageLink}
               title={e.title}
               description={e.description}
               due={e.due}
