@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { Confirmation } from "../components/Confirmation";
-import { Loading } from "../components/Loading";
 import { TaskCard } from "../components/TaskCard";
 
 export const AllTasksPage = () => {
