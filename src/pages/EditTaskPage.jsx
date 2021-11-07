@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import { Form } from "../components/Form";
+import { Loading } from "../components/Loading";
 
 export const EditTaskPage = () => {
   const { id } = useParams();
@@ -8,7 +9,6 @@ export const EditTaskPage = () => {
 
   useEffect(() => {
     const fetchInputValue = async () => {
-      console.log("what is id", id);
       const rawData = await fetch(
         `https://task-tracker-minu.herokuapp.com/tasks/${id}`
       );
@@ -21,11 +21,7 @@ export const EditTaskPage = () => {
   }, []);
 
   if (initialTask == null) {
-    return (
-      <div className="full-body center">
-        <img src="../../Spinner-1s-200px.svg" />
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
