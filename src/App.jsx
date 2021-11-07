@@ -1,5 +1,5 @@
 import { NavBar } from "./components/NavBar";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Switch, HashRouter } from "react-router-dom";
 import { ErrorPage } from "./pages/ErrorPage";
 import { AllTasksPage } from "./pages/AllTasksPage";
 import { AddTaskPage } from "./pages/AddTaskPage";
@@ -10,7 +10,7 @@ import { EditTaskPage } from "./pages/EditTaskPage";
 function App() {
   return (
     <div className="full-body">
-      <BrowserRouter>
+      <HashRouter>
         <NavBar />
         <Switch>
           <Route path="/" exact>
@@ -32,7 +32,7 @@ function App() {
             <ErrorPage />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
