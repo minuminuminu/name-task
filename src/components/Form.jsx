@@ -82,12 +82,6 @@ export const Form = (props) => {
                 </option>
               );
             })}
-            <option
-              value="dummy_value"
-              onClick={() => history.push("/profile-overview")}
-            >
-              Profile overview...
-            </option>
           </select>
           <br />
           <input
@@ -123,6 +117,13 @@ export const Form = (props) => {
               ADD TASK
             </button>
           )}
+          <br />
+          <button
+            className="profile-ovw-btn"
+            onClick={() => history.push("/profile-overview")}
+          >
+            PROFILE OVERVIEW
+          </button>
         </form>
       </div>
     </div>

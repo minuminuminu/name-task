@@ -275,3 +275,7 @@ textarea {
 .add-p-btn:hover {
   background-color: rgb(14, 134, 14);
 }
+.profile-ovw-btn {
+  width: 8vw;
+  height: 3vh;
+}
